@@ -2,7 +2,24 @@ import sys
 sys.stderr.write('module loaded\n')
 
 class VcfEntry(object):
-    """Class representing a vcf entry or genomic variant recorded in a vcf file"""    
+    """Class representing a vcf entry or genomic variant recorded in a vcf file
+    
+    Has the following attributes:
+    self.chrom      -- holding the chromosome name
+    self.pos        -- position on chromosome
+    self.id         -- variation id
+    self.refBase    -- the reference base
+    self.altBases   -- listr with alternative bases
+    self.varQual    -- variant quality
+    self.passFilter -- if pass filter
+    self.info       -- variant info field
+    perSampleInfo   -- all the per sample infos, this is a dict with samplenames as keys and the following info:
+	sampleNames -- key in dict, value is a dict with the following keys
+	    DP -- sample read depth at variant position
+	    GT -- sample genotype
+	    AD -- sample allele distribution
+	    GQ -- sample genotype quality
+    """    
 
     def __init__(self,line,sampleNames):
 
