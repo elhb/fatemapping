@@ -20,8 +20,8 @@ class VcfEntry(object):
 	    elif i == 2:
 		self.id = line[i]
 		if line[i] == '.':
-		    AnalysisPipe.nonDbSNPVarCount+=1;
-		    self .id = 'novel#'+str(AnalysisPipe.nonDbSNPVarCount)
+		    #AnalysisPipe.nonDbSNPVarCount+=1;
+		    self .id = 'novel#'#+str(AnalysisPipe.nonDbSNPVarCount)
 	    elif i == 3: self.refBase = line[i]
 	    elif i == 4: self.altBases = line[i].split(',')
 	    elif i == 5: self.varQual = line[i]
@@ -67,6 +67,7 @@ def vcfParser(infilename,subsetSize=None,logfile=False):
 	import sys
 	import time
 	from misc import bufcount
+	from misc import Progress
 	
 	nonDbSNPVarCount = 0
 	vcfLineCount = 0
@@ -78,9 +79,9 @@ def vcfParser(infilename,subsetSize=None,logfile=False):
 	if not subsetSize:
 	    totalLineNum = bufcount(infilename)
 	    if logfile: logfile.write('#LOGMSG#'+time.strftime("%Y-%m-%d:%H:%M:%S",time.localtime())+'# '+str(totalLineNum)+' lines found in vcf file.\n')
-	    progress = Progress(totalLineNum, verb='full', logfile=AnalysisPipe.logfile, unit='variants read from disk' ,mem=False, printint=1)
+	    progress = Progress(totalLineNum, verb='full', logfile=logfile, unit='variants read from disk' ,mem=False, printint=1)
 	else:
-	    progress = Progress(subsetSize, verb='full', logfile=AnalysisPipe.logfile, unit='variants read from disk' ,mem=False)
+	    progress = Progress(subsetSize, verb='full', logfile=logfile, unit='variants read from disk' ,mem=False)
 
 	with open(infilename) as infile:
 	    for line in infile:
