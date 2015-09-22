@@ -1,3 +1,5 @@
+import sys
+
 def bufcount(filename): # funtion "stolen from the internet" and modified
 	""" returns the number of lines in a file
 	"""
