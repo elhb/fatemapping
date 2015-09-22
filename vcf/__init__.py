@@ -48,8 +48,7 @@ class VcfEntry(object):
 		    try:
 			if self.perSampleInfo[sampleNames[i-9]]['DP'] == '.': self.perSampleInfo[sampleNames[i-9]]['DP'] = 0
 		    except KeyError:
-			msg = '#ERROR_MSG#'+time.strftime("%Y-%m-%d:%H:%M:%S",time.localtime())+'# VcfEntry format error: '+str(infoTags)+' '+str(sampleInfoList)+' 
-'+str(self.perSampleInfo[sampleNames[i-9]])+' '+str(i)+' >'+str(sampleInfo)+'<'+'.\n'
+			msg = '#ERROR_MSG#'+time.strftime("%Y-%m-%d:%H:%M:%S",time.localtime())+'# VcfEntry format error: '+str(infoTags)+' '+str(sampleInfoList)+' '+str(self.perSampleInfo[sampleNames[i-9]])+' '+str(i)+' >'+str(sampleInfo)+'<'+'.\n'
 			sys.stderr.write(msg)
 
 	for altBase in list(self.altBases):
@@ -105,7 +104,6 @@ def vcfParser(infilename,subsetSize=None,logfile=False):
 		    yield variation		    
 		    if subsetSize and logfile: progress.update()
 		    toQcounter+=1
-		    if variation.chrom != lastChomosomeRead and logfile: logfile.write('#LOGMSG#'+time.strftime("%Y-%m-%d:%H:%M:%S",time.localtime())+'# started loading variations from 
-'+str(variation.chrom)+'.\n')
+		    if variation.chrom != lastChomosomeRead and logfile: logfile.write('#LOGMSG#'+time.strftime("%Y-%m-%d:%H:%M:%S",time.localtime())+'# started loading variations from '+str(variation.chrom)+'.\n')
 		    lastChomosomeRead = variation.chrom
 	if logfile: logfile.write('#LOGMSG#'+time.strftime("%Y-%m-%d:%H:%M:%S",time.localtime())+'# vcf file loaded.\n')
